@@ -5,6 +5,18 @@ FROM gobuffalo/buffalo:v0.9.4 as builder
 RUN mkdir -p $GOPATH/src/github.com/spatil/zephyr_app
 WORKDIR $GOPATH/src/github.com/spatil/zephyr_app
 
+# Setup github credentials to pull private repo
+RUN git config --global url."git@github.com:".insteadOf "https://github.com/"
+RUN cat ~/.gitconfig
+RUN mkdir /root/.ssh/
+ADD id_rsa /root/.ssh/id_rsa
+# Create known_hosts
+RUN touch /root/.ssh/known_hosts
+# Add bitbuckets key
+RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
+
+RUN cat /root/.ssh/known_hosts
+
 # this will cache the npm install step, unless package.json changes
 ADD package.json .
 ADD yarn.lock .
