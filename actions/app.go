@@ -55,6 +55,7 @@ func App() *buffalo.App {
 		app.Use(T.Middleware())
 
 		app.GET("/", HomeHandler)
+		app.GET("/motor", MotorHandler)
 
 		app.ServeFiles("/assets", packr.NewBox("../public/assets"))
 	}
