@@ -1,0 +1,80 @@
+<h3> Setup </h3>
+<a href="<%= setupPath() %>" class="btn btn-success">Initialize</a>
+
+<h3> Test Platter Motor </h3>
+<a href="<%= motorPath({rpm: 33.33}) %>" class="btn btn-success">33.33 rpm</a>
+<a href="<%= motorPath({rpm: 45}) %>" class="btn btn-success">45 rpm</a>
+
+<h3> Tracks </h3>
+<a href="<%= tracksPath() %>" class="btn btn-success">Detect Tracks</a>
+
+<h3> Manual Play </h3>
+<a href="<%= tracksPath() %>" class="btn btn-success">Manual Play</a>
+
+<!--h1>Reports</h1>
+
+<table class="table table-striped">
+  <thead>
+    <th>Created At</th>
+    <th>File</th>
+    <th>Last Analysed at</th>
+    <th>Status</th>
+    <th>&nbsp;</th>
+  </thead>
+  <tbody>
+    <%= for (i) in reports { %>
+    <tr>
+      <td>10-Oct-2017 12:00 PM</td>
+      <td>TripleH-MHTS-0003-050817.xlsx</td>
+      <td>10-Oct-2017 01:00 PM</td>
+			<td><div class="led-green"></div></td>
+      <td>
+        <div class="pull-right">
+          <a href="#" class="btn btn-info">Process</a>
+          <a href="#" class="btn btn-info">View Results</a>
+        </div>
+      </td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<h1>Analysis Report</h1>
+
+<p class="pull-right">
+  <a href="" class="btn btn-primary">Export</a>
+</p>
+<h4>Controller Status</h4>
+<table class="table table-striped">
+  <thead>
+    <th>Name</th>
+    <th>Status</th>
+  </thead>
+	<tbody>
+		<tr><td>NC</td><td>Run is Valid</td></tr>
+		<tr><td>Mix PC</td><td>Run is Valid</td></tr>
+		<tr><td>NTC</td><td>Run is Valid</td></tr>
+	</tbody>
+  <tbody>
+</table>
+<h4>Sample Status</h4>
+<table class="table table-striped">
+  <thead>
+    <th>Well Position</th>
+    <th>Sample Name</th>
+    <th>Target</th>
+    <th>CT Value</th>
+    <th>Result</th>
+  </thead>
+  <tbody>
+    <%= for (i) in reports { %>
+    <tr>
+      <td>A1</td>
+      <td>WHO HIV-1 10/152</td>
+      <td>HIV</td>
+			<td>29.589</td>
+			<td>HIV Reactive</td>
+    </tr>
+    <% } %>
+  </tbody>
+</table-->

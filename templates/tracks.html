@@ -1,0 +1,13 @@
+<div class="col-md-12">
+  <div class="row">
+    <%= for (track) in tracks { %>
+      <div class="col-md-6 track" data-no="<%= track.No %>">
+        <a class="btn btn-info col-md-12" href="#"> <%= "Track " + track.No %></a>
+      </div>
+    <% } %>
+  </div>
+  <div class="row">
+    <div class="col-md-2 play"><a class="btn btn-info" href="<%= componentsPath() %>">Back</a></div>
+    <div class="col-md-2 col-md-offset-3 play"><a class="btn btn-success col-md-12">Play</a></div>
+  </div>
+</div>
