@@ -1,80 +1,93 @@
-<h3> Setup </h3>
-<a href="<%= setupPath() %>" class="btn btn-success">Initialize</a>
+<div class="col-sm-8">
+  <h3> Initialize Zephyr </h3>
+  <a href="<%= setupPath() %>" class="btn btn-success btn-lg">Initialize</a>
 
-<h3> Test Platter Motor </h3>
-<a href="<%= motorPath({rpm: 33.33}) %>" class="btn btn-success">33.33 rpm</a>
-<a href="<%= motorPath({rpm: 45}) %>" class="btn btn-success">45 rpm</a>
+  <h3> Test Platter Motor </h3>
+  <a href="<%= motorPath({rpm: 33.33}) %>" class="btn btn-success btn-lg">33.33 rpm</a>
+  <a href="<%= motorPath({rpm: 45}) %>" class="btn btn-success btn-lg">45 rpm</a>
 
-<h3> Tracks </h3>
-<a href="<%= tracksPath() %>" class="btn btn-success">Detect Tracks</a>
+  <h3> Tracks </h3>
+  <a href="<%= tracksPath() %>" class="btn btn-success btn-lg">Detect Tracks</a>
 
-<h3> Manual Play </h3>
-<a href="<%= tracksPath() %>" class="btn btn-success">Manual Play</a>
+  <h3> Manual Play </h3>
+  <a href="<%= tracksPath() %>" class="btn btn-success btn-lg">Manual Play</a>
+</div>
+<div class="col-sm-4 rpm-monitor">
+  <h2> Current RPM <h2>
+  <div id="rpm">0.0</div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    monitorRPM();
+  })
+</script>
+
 
 <!--h1>Reports</h1>
 
-<table class="table table-striped">
+  <table class="table table-striped">
   <thead>
-    <th>Created At</th>
-    <th>File</th>
-    <th>Last Analysed at</th>
-    <th>Status</th>
-    <th>&nbsp;</th>
+  <th>Created At</th>
+  <th>File</th>
+  <th>Last Analysed at</th>
+  <th>Status</th>
+  <th>&nbsp;</th>
   </thead>
   <tbody>
-    <%= for (i) in reports { %>
-    <tr>
-      <td>10-Oct-2017 12:00 PM</td>
-      <td>TripleH-MHTS-0003-050817.xlsx</td>
-      <td>10-Oct-2017 01:00 PM</td>
-			<td><div class="led-green"></div></td>
-      <td>
-        <div class="pull-right">
-          <a href="#" class="btn btn-info">Process</a>
-          <a href="#" class="btn btn-info">View Results</a>
-        </div>
-      </td>
-    </tr>
-    <% } %>
+  <%= for (i) in reports { %>
+  <tr>
+  <td>10-Oct-2017 12:00 PM</td>
+  <td>TripleH-MHTS-0003-050817.xlsx</td>
+  <td>10-Oct-2017 01:00 PM</td>
+  <td><div class="led-green"></div></td>
+  <td>
+  <div class="pull-right">
+  <a href="#" class="btn btn-info">Process</a>
+  <a href="#" class="btn btn-info">View Results</a>
+  </div>
+  </td>
+  </tr>
+  <% } %>
   </tbody>
-</table>
+  </table>
 
-<h1>Analysis Report</h1>
+  <h1>Analysis Report</h1>
 
-<p class="pull-right">
+  <p class="pull-right">
   <a href="" class="btn btn-primary">Export</a>
-</p>
-<h4>Controller Status</h4>
-<table class="table table-striped">
+  </p>
+  <h4>Controller Status</h4>
+  <table class="table table-striped">
   <thead>
-    <th>Name</th>
-    <th>Status</th>
-  </thead>
-	<tbody>
-		<tr><td>NC</td><td>Run is Valid</td></tr>
-		<tr><td>Mix PC</td><td>Run is Valid</td></tr>
-		<tr><td>NTC</td><td>Run is Valid</td></tr>
-	</tbody>
-  <tbody>
-</table>
-<h4>Sample Status</h4>
-<table class="table table-striped">
-  <thead>
-    <th>Well Position</th>
-    <th>Sample Name</th>
-    <th>Target</th>
-    <th>CT Value</th>
-    <th>Result</th>
+  <th>Name</th>
+  <th>Status</th>
   </thead>
   <tbody>
-    <%= for (i) in reports { %>
-    <tr>
-      <td>A1</td>
-      <td>WHO HIV-1 10/152</td>
-      <td>HIV</td>
-			<td>29.589</td>
-			<td>HIV Reactive</td>
-    </tr>
-    <% } %>
+  <tr><td>NC</td><td>Run is Valid</td></tr>
+  <tr><td>Mix PC</td><td>Run is Valid</td></tr>
+  <tr><td>NTC</td><td>Run is Valid</td></tr>
   </tbody>
-</table-->
+  <tbody>
+  </table>
+  <h4>Sample Status</h4>
+  <table class="table table-striped">
+  <thead>
+  <th>Well Position</th>
+  <th>Sample Name</th>
+  <th>Target</th>
+  <th>CT Value</th>
+  <th>Result</th>
+  </thead>
+  <tbody>
+  <%= for (i) in reports { %>
+  <tr>
+  <td>A1</td>
+  <td>WHO HIV-1 10/152</td>
+  <td>HIV</td>
+  <td>29.589</td>
+  <td>HIV Reactive</td>
+  </tr>
+  <% } %>
+  </tbody>
+  </table-->

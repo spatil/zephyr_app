@@ -200,3 +200,15 @@ body.startup {
 .play {
   margin-top: 15px;
 }
+
+#rpm, .rpm-monitor {
+  text-align: center;
+}
+
+#rpm {
+  color: blue;
+}
+
+.btn:hover {
+  background-color: inherit;
+}
