@@ -39,7 +39,8 @@ func MotorHandler(c buffalo.Context) error {
 }
 
 func SetupHandler(c buffalo.Context) error {
-	zephyr.Setup()
+	//zephyr.Setup()
+	c.Flash().Add("success", "Initialized the devices")
 	return c.Redirect(302, "/components")
 }
 
