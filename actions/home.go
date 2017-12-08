@@ -1,7 +1,7 @@
 package actions
 
 import (
-	"fmt"
+	"strconv"
 	"time"
 
 	"github.com/gautamrege/zephyr"
@@ -11,6 +11,7 @@ import (
 // HomeHandler is a default handler to serve up
 // a home page.
 func HomeHandler(c buffalo.Context) error {
+	go zephyr.Setup()
 	return c.Render(200, r.HTML("startup.html"))
 }
 
@@ -25,14 +26,15 @@ func ComponentHandler(c buffalo.Context) error {
 }
 
 func StopHandler(c buffalo.Context) error {
-	zephyr.Stop()
+	devices := zephyr.GetDevices()
+	devices.PlatterMotor.StopMotor()
 	return c.Render(200, r.HTML("components.html"))
 }
 
 func MotorHandler(c buffalo.Context) error {
-	//rpm, _ := strconv.ParseFloat(c.Param("rpm"), 64)
-	//zephyr.TestPlatterMotor(rpm, 200)
-	fmt.Println(c.Websocket())
+	devices := zephyr.GetDevices()
+	speed, _ := strconv.Atoi(c.Param("rpm"))
+	devices.PlatterMotor.ChangeSpeed(speed)
 	return c.Redirect(302, "/components")
 }
 
@@ -42,9 +44,11 @@ func SetupHandler(c buffalo.Context) error {
 }
 
 func TracksHandler(c buffalo.Context) error {
-	tracks := zephyr.DetectTracks()
-	c.Set("tracks", tracks)
-	return c.Render(200, r.HTML("tracks.html"))
+	devices := zephyr.GetDevices()
+
+	devices.StartPlatterMotor()
+	go devices.DetectTracks()
+	return c.Redirect(302, "/components?monitor_rpm=true")
 }
 
 func RpmHandler(c buffalo.Context) error {
@@ -66,13 +70,12 @@ func RpmHandler(c buffalo.Context) error {
 			wcon.WriteJSON(map[string]float64{"rpm": rpm_per_rotation})
 		}
 	}
-
 	return nil
 }
 
 func PlayTrackHandler(c buffalo.Context) error {
-	//devices := zephyr.GetDevices()
+	devices := zephyr.GetDevices()
 
-	//devices.StartPlatterMotor()
+	devices.StartPlatterMotor()
 	return c.Redirect(302, "/components?monitor_rpm=true")
 }

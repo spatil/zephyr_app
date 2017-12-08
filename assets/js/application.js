@@ -3,8 +3,14 @@ require("bootstrap-sass/assets/javascripts/bootstrap.js");
 require("./jquery.simple.websocket.min.js")
 
 $(() => {
-  
+  $('a').on('touchstart' ,function(e) {
+    e.preventDefault();
+    $(this).trigger("click");
+      return false;
+  });
 });
+
+
 
 
 window.monitorRPM = function() {

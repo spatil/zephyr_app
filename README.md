@@ -38,7 +38,7 @@ Exec=/usr/bin/chromium-browser --noerrdialogs --kiosk --app=http://localhost:300
 FILE : "/etc/rc.local"
 Notes: Start the web app in deamon mode as soon as the PI boot up 
 
-/home/pi/zephyr_app &
+/home/pi/start_zephyr.sh 
 
 
 FILE : ".config/lxsession/LXDE-pi/autostart"

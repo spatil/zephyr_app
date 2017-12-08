@@ -3,14 +3,13 @@
   <a href="<%= setupPath() %>" class="btn btn-success btn-lg">Initialize</a>
 
   <h3> Test Platter Motor </h3>
-  <a href="<%= motorPath({rpm: 33.33}) %>" class="btn btn-success btn-lg">33.33 rpm</a>
-  <a href="<%= motorPath({rpm: 45}) %>" class="btn btn-success btn-lg">45 rpm</a>
+  <a href="<%= motorPath({rpm: 1}) %>" class="btn btn-success btn-lg">33.33 rpm</a>
+  <a href="<%= motorPath({rpm: 0}) %>" class="btn btn-success btn-lg">45 rpm</a>
 
   <h3> Tracks </h3>
-  <a href="<%= tracksPath() %>" class="btn btn-success btn-lg">Detect Tracks</a>
+  <a href="<%= tracksPath() %>" class="btn btn-success btn-lg">Test</a>
+  <a href="<%= stopPath() %>" class="btn btn-success btn-lg">Stop Platter Motor</a>
 
-  <h3> Manual Play </h3>
-  <a href="<%= tracksPath() %>" class="btn btn-success btn-lg">Manual Play</a>
 </div>
 <div class="col-sm-4 rpm-monitor">
   <h2> Current RPM <h2>
@@ -18,8 +17,11 @@
 </div>
 
 <script>
+  var is_monitor_rpm = "<%= monitor_rpm %>"
   $(document).ready(function(){
-    monitorRPM();
+    if(is_monitor_rpm == "true") {
+      monitorRPM();
+    }
   })
 </script>
 
