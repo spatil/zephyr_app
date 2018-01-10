@@ -61,7 +61,11 @@ func App() *buffalo.App {
 		app.GET("/tracks", TracksHandler)
 		app.GET("/stop", StopHandler)
 		app.GET("/rpm_monitor", RpmHandler)
+		app.GET("/step_monitor", MotorStepHandler)
 		app.GET("/play", PlayTrackHandler)
+		app.GET("/set_arm_speed/{speed}", ArmSpeedHandler)
+		app.GET("/arm_motor/{action}", ArmMotorHandler)
+		app.POST("/change_pw", ArmMotorPWHandler)
 
 		app.ServeFiles("/assets", packr.NewBox("../public/assets"))
 	}

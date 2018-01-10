@@ -34,21 +34,19 @@ func StopHandler(c buffalo.Context) error {
 func MotorHandler(c buffalo.Context) error {
 	devices := zephyr.GetDevices()
 	speed, _ := strconv.Atoi(c.Param("rpm"))
-	devices.PlatterMotor.ChangeSpeed(speed)
+	devices.PlatterMotor.ChangePlatterSpeed(speed)
 	return c.Redirect(302, "/components")
 }
 
 func SetupHandler(c buffalo.Context) error {
-	//zephyr.Setup()
+	zephyr.Setup()
 	c.Flash().Add("success", "Initialized the devices")
 	return c.Redirect(302, "/components")
 }
 
 func TracksHandler(c buffalo.Context) error {
 	devices := zephyr.GetDevices()
-
 	devices.StartPlatterMotor()
-	go devices.DetectTracks()
 	return c.Redirect(302, "/components?monitor_rpm=true")
 }
 
@@ -74,9 +72,44 @@ func RpmHandler(c buffalo.Context) error {
 	return nil
 }
 
+func MotorStepHandler(c buffalo.Context) error {
+	wcon, _ := c.Websocket()
+	d := zephyr.GetDevices()
+
+	for {
+		wcon.WriteJSON(map[string]int{"steps": d.ArmMotor.StepCounter})
+	}
+	return nil
+}
+
 func PlayTrackHandler(c buffalo.Context) error {
 	devices := zephyr.GetDevices()
 
 	devices.StartPlatterMotor()
 	return c.Redirect(302, "/components?monitor_rpm=true")
+}
+
+func ArmSpeedHandler(c buffalo.Context) error {
+	devices := zephyr.GetDevices()
+	speed, _ := strconv.Atoi(c.Param("speed"))
+	devices.ArmMotor.SetArmMotorSpeed(speed)
+	return c.Redirect(302, "/components")
+}
+
+func ArmMotorHandler(c buffalo.Context) error {
+	devices := zephyr.GetDevices()
+	action, _ := strconv.Atoi(c.Param("action"))
+	if action == 0 {
+		go devices.DetectTracks()
+	} else {
+		devices.ArmMotor.StopMotor()
+	}
+	return c.Redirect(302, "/components")
+}
+
+func ArmMotorPWHandler(c buffalo.Context) error {
+	devices := zephyr.GetDevices()
+	pw, _ := strconv.Atoi(c.Request().Form["pw"][0])
+	devices.ArmMotor.StepChannel <- pw
+	return c.Render(200, r.String(""))
 }
