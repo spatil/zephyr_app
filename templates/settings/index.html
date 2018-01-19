@@ -1,32 +1,31 @@
 <div class="col-xs-12">
-  <div class="col-xs-4">
-    <h3> Initialize Zephyr </h3>
-    <a href="<%= setupPath() %>" class="btn btn-success btn-lg">Initialize</a>
+  <div class="col-xs-8">
+    <a href="<%= setupPath() %>" class="btn btn-success btn-lg">Restart</a>
+    <a href="<%= dashboardPath() %>" class="btn btn-success btn-lg">Back</a>
   </div>
   <div class="col-xs-4 rpm-monitor">
     <h2> Current RPM <h2>
     <div id="rpm">0.0</div>
-  </div>
-  <div class="col-xs-4 rpm-monitor">
-    <h2> Step Counter <h2>
-    <div id="steps">0.0</div>
   </div>
 </div>
 
 <div class="col-xs-12">
   <h3>Platter Motor  </h3>
   <a href="<%= tracksPath() %>" class="btn btn-success btn-lg">Start</a>
-  <a href="<%= stopPath() %>" class="btn btn-success btn-lg">Stop</a>
-  <a href="<%= motorPath({rpm: 1}) %>" class="btn btn-success btn-lg">33.33 rpm</a>
-  <a href="<%= motorPath({rpm: 0}) %>" class="btn btn-success btn-lg">45 rpm</a>
+  <a href="<%= settingsStopPath() %>" class="btn btn-success btn-lg">Stop</a>
+  <a href="<%= settingsMotorPath({rpm: 1}) %>" class="btn btn-success btn-lg">33.33 rpm</a>
+  <a href="<%= settingsMotorPath({rpm: 0}) %>" class="btn btn-success btn-lg">45 rpm</a>
   <input type="text" name="pw" id="pw"/>
 
   <h3> Arm Motor  </h3>
-  <a href="<%= armMotorPath({action: 0}) %>" class="btn btn-success btn-lg">Start</a>
-  <a href="<%= armMotorPath({action: 1}) %>" class="btn btn-success btn-lg">Stop</a>
-  <a href="<%= setArmSpeedPath({speed: 0}) %>" class="btn btn-success btn-lg">10.5 rpm</a>
-  <a href="<%= setArmSpeedPath({speed: 1}) %>" class="btn btn-success btn-lg">1 rpm</a>
+  <a href="<%= settingsArmMotorPath({action: 0}) %>" class="btn btn-success btn-lg">Start</a>
+  <a href="<%= settingsArmMotorPath({action: 1}) %>" class="btn btn-success btn-lg">Stop</a>
+  <a href="<%= settingsSetArmSpeedPath({speed: 0}) %>" class="btn btn-success btn-lg">10.5 rpm</a>
+  <a href="<%= settingsSetArmSpeedPath({speed: 1}) %>" class="btn btn-success btn-lg">1 rpm</a>
   <button class="btn btn-info btn-lg" id="setPw"> Set PW </button>
+  <a href="<%= settingsLoaderPath({action: 0}) %>" class="btn btn-success btn-lg">Arm Load</a>
+  <a href="<%= settingsLoaderPath({action: 1}) %>" class="btn btn-success btn-lg">Arm Unload</a>
+   
 </div>
 
 <script>
@@ -35,7 +34,6 @@ $(document).ready(function(){
   if(is_monitor_rpm == "true") {
     monitorRPM();
   }
-  monitorSteps();
   loadKeypad();
 })
 </script>

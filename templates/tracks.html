@@ -1,13 +1,14 @@
 <div class="col-sm-12">
-  <div class="row">
+  <div class="row tracks" >
     <%= for (track) in tracks { %>
-      <div class="col-sm-6 track" data-no="<%= track.No %>">
-        <a class="btn btn-info col-sm-12 btn-lg" href="#"> <%= "Track " + track.No %></a>
+      <div class="col-sm-6 track">
+        <button class="btn btn-info col-sm-12 btn-lg" data-no="<%= track.No %>"> <%= "Track " + track.No %></button>
       </div>
     <% } %>
   </div>
   <div class="row">
-    <div class="col-sm-2 play"><a class="btn btn-info btn-lg" href="<%= componentsPath() %>">Back</a></div>
-    <div class="col-sm-2 col-sm-offset-3 play"><a class="btn btn-success col-sm-12 btn-lg" href="<%= playPath() %>">Play</a></div>
+    <div class="col-sm-2"><a class="btn btn-info btn-lg" href="<%= settingsPath() %>">Back</a></div>
+    <div class="col-sm-2"><button class="btn btn-success col-sm-12 btn-lg play_track">Play</button></div>
+    <div class="col-sm-4"><button class="btn btn-success col-sm-12 btn-lg move_arm">Move Tone Arm</button></div>
   </div>
 </div>

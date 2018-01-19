@@ -219,3 +219,79 @@ body.startup {
 .nmpd-grid {position:absolute; left:50px; top:50px; z-index:5000; -khtml-user-select: none; padding:10px; width: initial;}
 .nmpd-overlay {z-index:4999;}
 input.nmpd-display {text-align: right;}
+
+button.active {
+  background-color: #c9302c !important;
+  border-color: #ac2925 !important;
+  color: #fff;
+}
+
+.dashboard div.col-xs-6 {
+  text-align: center;
+  display: table-cell;
+  vertical-align: center;
+}
+
+.container {
+  display: table !important;
+}
+
+.play_row {
+  margin-top: 80px;
+}
+
+.dashboard button, #play, #restart {
+  min-width: 200px;
+}
+
+.btn-sq-lg {
+  width: 150px !important;
+  height: 150px !important;
+}
+
+.btn-sq {
+  width: 100px !important;
+  height: 100px !important;
+  font-size: 10px;
+}
+
+.btn-sq-sm {
+  width: 50px !important;
+  height: 50px !important;
+  font-size: 10px;
+}
+
+.btn-sq-xs {
+  width: 25px !important;
+  height: 25px !important;
+  padding:2px;
+}
+
+.press-button {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.press-button:hover {background-color: #3e8e41}
+
+.press-button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.p-top {
+  padding-top: 50px;
+}
+
+.p-bottom {
+  padding-bottom: 50px;
+}

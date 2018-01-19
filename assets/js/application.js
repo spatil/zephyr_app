@@ -8,6 +8,7 @@ $(() => {
 });
 
 $(document).ready(function() {
+  /*
   var tags = document.getElementsByTagName("a");
 
   $.each(tags, function(r) {
@@ -19,16 +20,81 @@ $(document).ready(function() {
        e.preventDefault();
     });
   });
+  */
+  var bd = document.getElementsByTagName("body")[0];
+  var mc = new Hammer.Manager(bd);
 
+  mc.add( new Hammer.Tap({event: 'tripletap', taps: 3 }));
+  mc.add( new Hammer.Tap({event: 'doubletap', taps: 2 }));
+  mc.add( new Hammer.Tap({event: 'singletap' }));
+
+  mc.get('doubletap').recognizeWith(['doubletap', 'singletap']);
+  mc.get('doubletap').recognizeWith('singletap');
+  mc.get('singletap').requireFailure('doubletap');
+
+  mc.on("singletap doubletap tripletap", function(ev) {
+    if(ev.type == "tripletap" && window.location.pathname == "/dashboard") {
+      window.location.href = "/settings";
+    }
+  });
+
+  $(".tracks").on("click", "button", function() {
+    $(".tracks button").removeClass("active");
+    $(this).addClass("active");
+  })
+
+  $(document).on("click", ".move_arm", function(e) {
+    if($(".tracks").find(".active").length == 0) {
+      alert("Please select track");
+    } else {
+      var track = $(".tracks").find(".active").data("no");
+      $.get("/settings/play", {action: 1, track: track});
+    }
+  });
+
+  $(document).on("click", ".play_track", function(e) {
+    if($(".tracks").find(".active").length == 0) {
+      alert("Please select track");
+    } else {
+      var track = $(".tracks").find(".active").data("no");
+      $.get("/settings/play", {action: 0, track: track});
+    }
+  });
 
   $(document).on("click", "#setPw", function() {
     var pw = $("#pw").val();
     if(pw == ""){
       alert("Please enter pulse width");
     } else {  
-      $.post("/change_pw", {pw: pw})
+      $.post("/settings/change_pw", {pw: pw})
     }
   });
+
+  $(".rpms").on("click", "button", function() {
+    $(".rpms button").removeClass("active");
+    $(this).addClass("active");
+  })
+
+  $(document).on("click", "#start_platter", function() {
+    if($(".rpms").find(".active").length == 0) {
+      alert("Please select RPM");
+    } else {  
+      var rpm = $(".rpms").find(".active").data("rpm");
+      window.location.href = "/platter/"+ rpm;
+    }
+  });
+
+
+	var arm_timer;
+	$(document).on("mousedown", ".move-left, .move-right", function() {
+		var dir = $(this).data("dir");
+		$.get("/move_arm/"+ dir);	
+		arm_timer = setInterval(function(){ $.get("/move_arm/"+ dir)}, 500);
+	});
+
+	$(document).on("mouseup", ".move-left, .move-right", function() {
+		clearInterval(arm_timer);
+	});
 });
 
 window.loadKeypad = function() {
@@ -43,7 +109,7 @@ window.loadKeypad = function() {
 
 
 window.monitorRPM = function() {
-  var webSocket = $.simpleWebSocket({ url: 'ws://127.0.0.1:3000/rpm_monitor' });
+  var webSocket = $.simpleWebSocket({ url: 'ws://127.0.0.1:3000/settings/rpm_monitor' });
 
   // reconnected listening
   webSocket.listen(function(message) {
@@ -51,11 +117,3 @@ window.monitorRPM = function() {
   });
 }
 
-window.monitorSteps = function() {
-  var webSocket = $.simpleWebSocket({ url: 'ws://192.168.1.14:3000/step_monitor' });
-
-  // reconnected listening
-  webSocket.listen(function(message) {
-    $("#steps").html(message.steps.toFixed(0));
-  });
-}
