@@ -85,15 +85,15 @@ $(document).ready(function() {
   });
 
 
-	var arm_timer;
 	$(document).on("mousedown", ".move-left, .move-right", function() {
+    console.log("down");
 		var dir = $(this).data("dir");
 		$.get("/move_arm/"+ dir);	
-		arm_timer = setInterval(function(){ $.get("/move_arm/"+ dir)}, 500);
 	});
 
 	$(document).on("mouseup", ".move-left, .move-right", function() {
-		clearInterval(arm_timer);
+    console.log("up");
+    $.get("/arm_motor/stop");	
 	});
 });
 

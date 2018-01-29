@@ -54,7 +54,7 @@ func App() *buffalo.App {
 		}
 		app.Use(T.Middleware())
 
-		app.GET("/", HomeHandler)
+		app.GET("/", DashboardIndex)
 		app.GET("/settings/motor/{rpm}", MotorHandler)
 		app.GET("/setup", SetupHandler)
 		app.GET("/tracks", TracksHandler)
@@ -73,6 +73,7 @@ func App() *buffalo.App {
 		app.GET("/manual_play", ManualPlayHandler)
 		app.GET("/platter/{rpm}", PlatterHandler)
 		app.GET("/move_arm/{direction}", ArmDirectionHandler)
+		app.GET("/arm_motor/stop", ArmMotorStopHandler)
 		app.GET("/restart", RestartHandler)
 		app.GET("/play", PlayHandler)
 	}

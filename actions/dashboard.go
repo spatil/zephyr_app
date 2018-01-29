@@ -9,6 +9,7 @@ import (
 
 // DashboardIndex default implementation.
 func DashboardIndex(c buffalo.Context) error {
+	go zephyr.Setup()
 	return c.Render(200, r.HTML("dashboard/index.html"))
 }
 
@@ -26,8 +27,15 @@ func ManualPlayHandler(c buffalo.Context) error {
 
 func ArmDirectionHandler(c buffalo.Context) error {
 	z := zephyr.GetInstance()
+	z.Devices.ArmMotor.StopMotor()
 	dir, _ := strconv.Atoi(c.Param("direction"))
-	go z.Devices.MoveToneArm(dir)
+	z.Devices.MoveToneArm(dir)
+	return c.Render(200, r.String(""))
+}
+
+func ArmMotorStopHandler(c buffalo.Context) error {
+	z := zephyr.GetInstance()
+	z.Devices.ArmMotor.StopMotor()
 	return c.Render(200, r.String(""))
 }
 
